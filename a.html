@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POPPI 活力飲品 - 響應式範例</title>
+    <!-- 載入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 設定 Inter 字體和自訂 Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'poppi-green': '#A9F100',
+                        'poppi-pink': '#EC0E6E',
+                        'poppi-text': '#1E293B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        display: ['Oswald', 'Impact', 'sans-serif'], // 類似圖片中的大標題字體
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 自訂 CSS 確保背景元素定位 */
+        .splash-bg {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none; /* 確保背景不會阻擋點擊事件 */
+        }
+        .text-shadow-custom {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-poppi-text">
+
+    <!-- 主要容器：限制寬度並啟用相對定位來包含絕對定位的背景元素 -->
+    <div class="relative min-h-screen overflow-hidden">
+        
+        <!-- === 絕對定位的背景裝飾元素 === -->
+        <div class="splash-bg top-0 left-0 w-48 h-48 bg-poppi-green rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="splash-bg bottom-1/4 right-0 w-64 h-64 bg-poppi-pink rounded-full blur-3xl transform translate-x-1/4 translate-y-1/4 hidden md:block"></div>
+        <div class="splash-bg top-1/2 left-1/4 w-32 h-32 bg-yellow-400 rounded-full blur-3xl hidden lg:block"></div>
+        <!-- === /絕對定位的背景裝飾元素 === -->
+
+        <!-- 內容區塊 -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
+
+            <!-- 導航列 (Navbar) -->
+            <nav class="flex justify-between items-center py-4 md:py-6">
+                <div class="text-3xl font-extrabold text-poppi-text uppercase tracking-widest">
+                    poppi
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#" class="hover:text-poppi-pink transition duration-150">Shop</a>
+                    <a href="#" class="hover:text-poppi-pink transition duration-150">Our Story</a>
+                    <a href="#" class="font-bold border-b-2 border-poppi-green pb-1">Regular Products</a>
+                    <a href="#" class="hover:text-poppi-pink transition duration-150">Find a Map</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- 搜尋圖示 -->
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <!-- 購物車圖示 -->
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <!-- 漢堡菜單 (僅在小螢幕顯示) -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- 頂部宣傳區塊 (Hero Section) -->
+            <header class="text-center py-10 md:py-20">
+                <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl font-black leading-none text-poppi-text mb-6 uppercase text-shadow-custom">
+                    THE BEST ENERGY DRINKS FOR HEALTH
+                </h1>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-10">
+                    Positive energy is the only energy desired with your perfect combination of immune boosting Vitamins, Biotin, as well as Clean Energy from natural products.
+                </p>
+                <!-- 罐子圖片展示 (簡化為三個罐子) -->
+                <div class="flex justify-center items-end space-x-4 mb-12 transform scale-[0.8] sm:scale-100">
+                    <img src="https://placehold.co/120x250/F8D1E6/poppi?text=Cherry+Cola" alt="Cherry Cola Can" class="h-48 md:h-60 transform hover:scale-105 transition duration-300 drop-shadow-xl" onerror="this.onerror=null;this.src='https://placehold.co/120x250/F8D1E6/poppi?text=Can+1'">
+                    <img src="https://placehold.co/140x280/F0649E/poppi?text=Raspberry+Rose" alt="Raspberry Rose Can" class="h-60 md:h-72 z-10 transform hover:scale-105 transition duration-300 drop-shadow-xl" onerror="this.onerror=null;this.src='https://placehold.co/140x280/F0649E/poppi?text=Can+2'">
+                    <img src="https://placehold.co/120x250/DFF7B8/poppi?text=Lemon+Lime" alt="Lemon Lime Can" class="h-48 md:h-60 transform hover:scale-105 transition duration-300 drop-shadow-xl" onerror="this.onerror=null;this.src='https://placehold.co/120x250/DFF7B8/poppi?text=Can+3'">
+                </div>
+            </header>
+
+            <!-- 產品特色區塊 -->
+            <section class="bg-white p-8 md:p-12 rounded-2xl shadow-xl mb-16">
+                <h2 class="text-3xl font-bold text-center mb-10">
+                    POPPI DRINKS IMPROVE YOURS NATURAL ENERGY
+                </h2>
+                <!-- 特色網格：手機單欄，平板以上四欄 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    
+                    <div class="flex flex-col items-center p-4">
+                        <span class="p-4 bg-yellow-100 rounded-full mb-3 text-yellow-600">
+                            <!-- SVG Icon Placeholder -->
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </span>
+                        <h3 class="font-semibold text-lg text-poppi-text">Natural Ingredients</h3>
+                    </div>
+
+                    <div class="flex flex-col items-center p-4">
+                        <span class="p-4 bg-pink-100 rounded-full mb-3 text-poppi-pink">
+                             <!-- SVG Icon Placeholder -->
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13v-1m4 1v-3m4 3V8m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </span>
+                        <h3 class="font-semibold text-lg text-poppi-text">Probiotics</h3>
+                    </div>
+
+                    <div class="flex flex-col items-center p-4">
+                        <span class="p-4 bg-green-100 rounded-full mb-3 text-poppi-green">
+                             <!-- SVG Icon Placeholder -->
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </span>
+                        <h3 class="font-semibold text-lg text-poppi-text">Sugar less</h3>
+                    </div>
+
+                    <div class="flex flex-col items-center p-4">
+                        <span class="p-4 bg-indigo-100 rounded-full mb-3 text-indigo-600">
+                             <!-- SVG Icon Placeholder -->
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </span>
+                        <h3 class="font-semibold text-lg text-poppi-text">Easily digestible</h3>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 重新發現熱情區塊 (Call to Action) -->
+            <section class="text-center py-10 md:py-16">
+                 <h2 class="text-4xl sm:text-5xl font-extrabold text-poppi-text mb-4 uppercase">
+                    IT'S TIME TO DISCOVER YOUR PASSION FOR POPPI.
+                </h2>
+                <p class="max-w-2xl mx-auto text-gray-500 mb-8">
+                    永遠不會太晚，現在就用 Poppi 氣泡飲重新點燃你的活力，開始新的旅程。
+                </p>
+
+                <!-- 產品展示網格 (Responsive Product Grid) -->
+                <!-- 手機單欄，平板兩欄，桌面三欄 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                    
+                    <!-- 產品卡片 1: Lemon Lime -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-poppi-green/20 flex flex-col items-center">
+                        <h3 class="text-2xl font-bold mb-2">Lemon Lime</h3>
+                        <p class="text-sm text-gray-500 mb-4">Love never fades. And the love story between the sour lemon and lime will be this way.</p>
+                        <img src="https://placehold.co/100x200/DFF7B8/poppi?text=Lemon+Lime" alt="Lemon Lime Can" class="w-24 h-auto my-4 transform hover:scale-105 transition duration-500">
+                        <button class="w-full mt-4 py-3 bg-poppi-green text-poppi-text font-bold rounded-full shadow-lg hover:bg-poppi-green/80 transition duration-200 uppercase" onclick="buyNow('Lemon Lime')">
+                            BUY NOW
+                        </button>
+                    </div>
+
+                    <!-- 產品卡片 2: Cherry Cola -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-poppi-pink/20 flex flex-col items-center">
+                        <h3 class="text-2xl font-bold mb-2">Cherry Cola</h3>
+                        <p class="text-sm text-gray-500 mb-4">Sweet cherries dancing with classic cola. The duo you always loved, now with added health benefits.</p>
+                        <img src="https://placehold.co/100x200/F8D1E6/poppi?text=Cherry+Cola" alt="Cherry Cola Can" class="w-24 h-auto my-4 transform hover:scale-105 transition duration-500">
+                        <button class="w-full mt-4 py-3 bg-poppi-pink text-white font-bold rounded-full shadow-lg hover:bg-poppi-pink/80 transition duration-200 uppercase" onclick="buyNow('Cherry Cola')">
+                            BUY NOW
+                        </button>
+                    </div>
+
+                    <!-- 產品卡片 3: Wild Berry -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-blue-400/20 flex flex-col items-center">
+                        <h3 class="text-2xl font-bold mb-2">Wild Berry</h3>
+                        <p class="text-sm text-gray-500 mb-4">A rich combination of sweet and tangy berries. Hydrating and delicious, cold as ice.</p>
+                        <img src="https://placehold.co/100x200/B2EBF2/poppi?text=Wild+Berry" alt="Wild Berry Can" class="w-24 h-auto my-4 transform hover:scale-105 transition duration-500">
+                        <button class="w-full mt-4 py-3 bg-blue-400 text-white font-bold rounded-full shadow-lg hover:bg-blue-400/80 transition duration-200 uppercase" onclick="buyNow('Wild Berry')">
+                            BUY NOW
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 底部註冊區塊 (JavaScript 互動) -->
+            <section class="bg-gray-100 p-8 md:p-12 rounded-2xl shadow-inner my-16">
+                <h2 class="text-3xl font-bold mb-4 text-center">訂閱我們的電子報</h2>
+                <p class="text-center text-gray-600 mb-8">取得獨家優惠和最新的健康飲品資訊。</p>
+
+                <div class="max-w-lg mx-auto flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <input type="email" id="emailInput" placeholder="請輸入您的電子郵件..."
+                           class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-poppi-pink focus:border-poppi-pink transition duration-150">
+                    <button id="subscribeButton"
+                            class="px-6 py-3 bg-poppi-pink text-white font-semibold rounded-lg shadow-md hover:bg-poppi-pink/90 transition duration-150 transform active:scale-95 w-full sm:w-auto">
+                        訂閱
+                    </button>
+                </div>
+                
+                <p id="subscriptionMessage" class="text-center mt-4 text-gray-700"></p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- JavaScript 腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailInput = document.getElementById('emailInput');
+            const subscribeButton = document.getElementById('subscribeButton');
+            const subscriptionMessage = document.getElementById('subscriptionMessage');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            // 這裡我們假設有一個隱藏的移動菜單，但在這個單一文件範例中，我們只處理按鈕點擊
+            
+            // 處理訂閱按鈕點擊
+            subscribeButton.addEventListener('click', function() {
+                const email = emailInput.value.trim();
+                if (email === "") {
+                    subscriptionMessage.textContent = "請輸入有效的電子郵件地址。";
+                    subscriptionMessage.classList.remove('text-green-600', 'text-red-600');
+                    subscriptionMessage.classList.add('text-red-600');
+                    return;
+                }
+
+                // 模擬非同步 API 呼叫
+                subscribeButton.disabled = true;
+                subscribeButton.textContent = '正在處理...';
+
+                setTimeout(() => {
+                    subscriptionMessage.textContent = `電子郵件: ${email} 訂閱成功！感謝您的支持。`;
+                    subscriptionMessage.classList.remove('text-red-600');
+                    subscriptionMessage.classList.add('text-green-600', 'font-semibold');
+                    emailInput.value = ''; // 清空輸入欄
+                    
+                    subscribeButton.textContent = '訂閱';
+                    subscribeButton.disabled = false;
+                }, 1500); // 模擬 1.5 秒延遲
+            });
+
+            // 處理購買按鈕點擊 (使用全局函數)
+            window.buyNow = function(flavor) {
+                const message = `已將 "${flavor}" 加入您的購物車。正在導向結帳頁面...`;
+                // 為了避免使用 alert()，我們使用一個自訂的模擬彈出訊息
+                const tempMsg = document.createElement('div');
+                tempMsg.className = 'fixed top-4 right-4 bg-gray-800 text-white p-3 rounded-lg shadow-xl animate-bounce';
+                tempMsg.textContent = message;
+                document.body.appendChild(tempMsg);
+                
+                setTimeout(() => {
+                    tempMsg.remove();
+                }, 2500);
+                
+                console.log(message);
+            }
+
+            // 處理移動菜單按鈕點擊 (簡單的切換邏輯)
+            mobileMenuButton.addEventListener('click', function() {
+                console.log("移動菜單開關被點擊。在完整的應用中，這裡會切換隱藏的移動導航列。");
+                // 在實際應用中，會找到隱藏的菜單元素並切換其 'hidden' 類別
+            });
+        });
+    </script>
+</body>
+</html>
